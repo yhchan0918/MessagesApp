@@ -18,9 +18,11 @@ const ChatMessage = (props: ChatMessageProps) => {
   return (
     <View style={styles.container}>
       <View style={isMyMsg() ? styles.myMessageBox : styles.messageBox}>
-        {!isMyMsg() && <Text style={isMyMsg() ? { color: '#000' } : { color: '#fff' }}>{message.user.name}</Text>}
-        <Text style={isMyMsg() ? { color: '#000' } : { color: '#fff' }}>{message.content}</Text>
-        <Text style={isMyMsg() ? { color: '#000' } : { color: '#fff' }}>{moment(message.createdAt).fromNow()}</Text>
+        {!isMyMsg() && <Text style={styles.username}>{message.user.name}</Text>}
+        <Text style={styles.message}>{message.content}</Text>
+        <Text style={isMyMsg() ? styles.myTime : styles.time}>
+          {moment(message.createdAt).fromNow()}
+        </Text>
       </View>
     </View>
   );

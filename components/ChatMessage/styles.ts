@@ -6,18 +6,34 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   messageBox: {
-    backgroundColor: Colors.light.tint,
+    backgroundColor: '#e5e5e5',
     marginRight: 50,
     borderRadius: 10,
     padding: 10,
     color: '#fff',
   },
   myMessageBox: {
-    backgroundColor: '#e5e5e5',
+    backgroundColor: '#95dffc',
     marginLeft: 50,
     borderRadius: 10,
     padding: 10,
     color: '#000',
+  },
+  username: {
+    color: Colors.light.tint,
+    fontWeight: 'bold',
+    marginBottom: 3,
+  },
+  message: {
+    marginBottom: 2,
+  },
+  time: {
+    alignSelf: 'flex-end',
+    color: 'grey',
+  },
+  myTime: {
+    alignSelf: 'flex-end',
+    color: '#37afe2',
   },
 });
 
