@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-messagesapp-dev-165007-authRole",
+      "UnauthRoleArn": "arn:aws:iam::036269492552:role/amplify-messagesapp-dev-165007-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::036269492552:role/amplify-messagesapp-dev-165007-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-messagesapp-dev-165007-deployment",
+      "UnauthRoleName": "amplify-messagesapp-dev-165007-unauthRole",
+      "StackName": "amplify-messagesapp-dev-165007",
+      "StackId": "arn:aws:cloudformation:us-east-1:036269492552:stack/amplify-messagesapp-dev-165007/7e70d760-6dd8-11eb-ba0e-0ecc4b1d1431",
+      "AmplifyAppId": "d2rhtw3wcsw4ui"
+    },
+    "categories": {
+      "auth": {
+        "messagesappda843bdb": {}
+      }
+    }
+  }
+}
