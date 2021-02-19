@@ -1,6 +1,10 @@
 import React from 'react';
 import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
-import moment from 'moment';
+import { API, graphqlOperation, Auth } from 'aws-amplify';
+import {
+  createChatRoom,
+  createChatRoomUser,
+} from '../../src/graphql/mutations';
 
 import { User } from '../../types';
 import styles from './styles';
@@ -15,7 +19,44 @@ const ContactListItem = (props: ContactListItemProps) => {
 
   const navigation = useNavigation();
 
-  const onClick = () => {};
+  const onClick = async () => {
+    try {
+      // 1. Create a new chat room
+      const newChatRoomData = await API.graphql(
+        graphqlOperation(createChatRoom, { input: {} })
+      );
+
+      if (!newChatRoomData.data) {
+        console.log('Failed to create a chatroom');
+        return;
+      }
+
+      const newChatRoom = newChatRoomData.data.createChatRoom;
+      // 2. Add 'user' to the chatroom
+      await API.graphql(
+        graphqlOperation(createChatRoomUser, {
+          input: {
+            userID: user.id,
+            chatRoomID: newChatRoom.id,
+          },
+        })
+      );
+      // 3. Add authenticated user to the chatroom
+      const userInfo = await Auth.currentAuthenticatedUser();
+      await API.graphql(
+        graphqlOperation(createChatRoomUser, {
+          input: {
+            userID: userInfo.attributes.sub,
+            chatRoomID: newChatRoom.id,
+          },
+        })
+      );
+      navigation.navigate('ChatRoom', {
+        id: newChatRoom.id,
+        name: 'hardcoded name',
+      });
+    } catch (error) {}
+  };
 
   return (
     <TouchableWithoutFeedback onPress={onClick}>

@@ -11,3 +11,6 @@ projects:
         codeGenTarget: typescript
         generatedFileName: src/API.ts
         docsFilePath: /Users/yhchan/Documents/Fullstack/reactnative/MessagesApp/graphql
+extensions:
+  amplify:
+    version: 3
