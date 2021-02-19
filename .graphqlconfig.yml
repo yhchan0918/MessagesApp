@@ -1,0 +1,13 @@
+projects:
+  messagesapp:
+    schemaPath: >-
+      Users/yhchan/Documents/Fullstack/reactnative/MessagesApp/graphql/schema.json
+    includes:
+      - src/graphql/**/*.ts
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: typescript
+        generatedFileName: src/API.ts
+        docsFilePath: /Users/yhchan/Documents/Fullstack/reactnative/MessagesApp/graphql
