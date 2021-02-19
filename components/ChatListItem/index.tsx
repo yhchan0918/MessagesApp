@@ -31,7 +31,7 @@ const ChatListItem = (props: ChatListItemProps) => {
   const onClick = () => {
     navigation.navigate('ChatRoom', { id: chatRoom.id, name: user.name });
   };
-
+  if (!otherUser) return null;
   return (
     <TouchableWithoutFeedback onPress={onClick}>
       <View style={styles.container}>

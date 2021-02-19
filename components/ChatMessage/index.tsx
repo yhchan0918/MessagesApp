@@ -6,13 +6,14 @@ import moment from 'moment';
 
 export type ChatMessageProps = {
   message: Message;
+  myID: String;
 };
 
 const ChatMessage = (props: ChatMessageProps) => {
-  const { message } = props;
+  const { message, myID } = props;
 
   const isMyMsg = () => {
-    return message.user.id === 'u1';
+    return message.user.id === myID;
   };
 
   return (
@@ -21,7 +22,7 @@ const ChatMessage = (props: ChatMessageProps) => {
         {!isMyMsg() && <Text style={styles.username}>{message.user.name}</Text>}
         <Text style={styles.message}>{message.content}</Text>
         <Text style={isMyMsg() ? styles.myTime : styles.time}>
-          {moment(message.createdAt).fromNow()}
+          {moment(message.createdAt).format('LT')}
         </Text>
       </View>
     </View>

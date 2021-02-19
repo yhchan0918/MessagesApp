@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TextInput, TouchableOpacity } from 'react-native';
 import {
   MaterialCommunityIcons,
@@ -7,19 +7,41 @@ import {
   Entypo,
   MaterialIcons,
 } from '@expo/vector-icons';
+import { API, graphqlOperation, Auth } from 'aws-amplify';
+import { createMessage } from '../../src/graphql/mutations';
 
 import styles from './styles';
 
-const InputBox = () => {
+const InputBox = (props) => {
+  const { chatRoomID } = props;
   const [msg, setMsg] = useState('');
+  const [myUserID, setMyUserID] = useState('');
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userInfo = await Auth.currentAuthenticatedUser();
+      setMyUserID(userInfo.attributes.sub);
+    };
+    fetchUser();
+  }, []);
 
   const onMicrophonePress = () => {
     console.warn('microphone');
   };
 
-  const onSendPress = () => {
-    console.warn(`Sending ${msg}`);
-    setMsg('');
+  const onSendPress = async () => {
+    try {
+      await API.graphql(
+        graphqlOperation(createMessage, {
+          input: {
+            content: msg,
+            userID: myUserID,
+            chatRoomID,
+          },
+        })
+      );
+      setMsg('');
+    } catch (error) {}
   };
   const onPress = () => {
     if (!msg) {
@@ -36,6 +58,7 @@ const InputBox = () => {
           placeholder={'Type a message'}
           style={styles.input}
           multiline
+          value={msg}
           onChangeText={(text) => setMsg(text)}
         />
         <Entypo name="attachment" size={24} color="grey" style={styles.icon} />

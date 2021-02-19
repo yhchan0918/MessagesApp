@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   myMessageBox: {
-    backgroundColor: '#95dffc',
+    backgroundColor: '#DCF8C5',
     marginLeft: 50,
     borderRadius: 10,
     padding: 10,
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   myTime: {
     alignSelf: 'flex-end',
-    color: '#37afe2',
+    color: 'grey',
   },
 });
 

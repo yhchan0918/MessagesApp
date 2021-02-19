@@ -17,7 +17,6 @@ export default function ChatsScreen() {
         const userData = await API.graphql(
           graphqlOperation(getUser, { id: userInfo.attributes.sub })
         );
-        console.log('lol', userData.data.getUser.chatRoomUser);
         setChatRooms(userData.data.getUser.chatRoomUser.items);
       } catch (e) {
         console.log(e);
