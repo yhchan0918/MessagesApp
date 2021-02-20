@@ -76,7 +76,7 @@ const ContactListItem = (props: ContactListItemProps) => {
         );
         navigation.navigate('ChatRoom', {
           id: newChatRoom.id,
-          name: 'hardcoded name',
+          name: currentUser.name,
         });
       }
     } catch (e) {

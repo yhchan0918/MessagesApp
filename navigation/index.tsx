@@ -87,6 +87,10 @@ function RootNavigator() {
         component={ChatRoomScreen}
         options={({ route }) => ({
           title: route.params.name,
+          headerBackTitleVisible: false,
+          headerTitleStyle: {
+            marginLeft: -30,
+          },
           headerRight: () => (
             <View
               style={{
