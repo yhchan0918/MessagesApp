@@ -28,7 +28,6 @@ const ChatListItem = (props: ChatListItemProps) => {
     };
     getOtherUser();
   }, []);
-
   const onClick = () => {
     navigation.navigate('ChatRoom', { id: chatRoom.id, name: user.name });
   };

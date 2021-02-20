@@ -12,8 +12,8 @@ export default function ContactsScreen() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const usersData = await API.graphql(graphqlOperation(listUsers));
         const userInfo = await Auth.currentAuthenticatedUser();
+        const usersData = await API.graphql(graphqlOperation(listUsers));
         const myFriends = usersData.data.listUsers.items.filter(
           (user) => user.id !== userInfo.attributes.sub
         );
