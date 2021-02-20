@@ -23,9 +23,10 @@ const ContactListItem = (props: ContactListItemProps) => {
   const onClick = async () => {
     try {
       const userInfo = await Auth.currentAuthenticatedUser();
-      // 0. Check is there is available chatroom with the clicked user
+      const myID = userInfo.attributes.sub;
+      // Check is there is available chatroom with the clicked user
       const userData = await API.graphql(
-        graphqlOperation(getUser, { id: userInfo.attributes.sub })
+        graphqlOperation(getUser, { id: myID })
       );
       const isAvailable = userData.data.getUser.chatRoomUser.items.find(
         (item) => {
@@ -35,14 +36,13 @@ const ContactListItem = (props: ContactListItemProps) => {
           return isFound;
         }
       );
-      console.log(isAvailable);
       if (isAvailable) {
         navigation.navigate('ChatRoom', {
           id: isAvailable.chatRoomID,
           name: currentUser.name,
         });
       } else {
-        // 1. Create a new chat room
+        // Create a new chat room
         const newChatRoomData = await API.graphql(
           graphqlOperation(createChatRoom, {
             input: { lastMessageID: '022af270-d0e9-4314-a83b-basd1942400a' },
@@ -55,7 +55,7 @@ const ContactListItem = (props: ContactListItemProps) => {
         }
 
         const newChatRoom = newChatRoomData.data.createChatRoom;
-        // 2. Add 'currentUser' to the chatroom
+        // Add 'currentUser' to the chatroom
         await API.graphql(
           graphqlOperation(createChatRoomUser, {
             input: {
@@ -64,12 +64,12 @@ const ContactListItem = (props: ContactListItemProps) => {
             },
           })
         );
-        // 3. Add authenticated user to the chatroom
+        // Add authenticated user to the chatroom
 
         await API.graphql(
           graphqlOperation(createChatRoomUser, {
             input: {
-              userID: userInfo.attributes.sub,
+              userID: myID,
               chatRoomID: newChatRoom.id,
             },
           })
