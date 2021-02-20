@@ -6,7 +6,6 @@ import { getUser } from './queries';
 import ChatListItem from '../components/ChatListItem';
 import NewMessageButton from '../components/NewMessageButton';
 import { View } from '../components/Themed';
-import chatRooms from '../data/ChatRooms';
 
 export default function ChatsScreen() {
   const [chatRooms, setChatRooms] = useState([]);
