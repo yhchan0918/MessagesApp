@@ -12,7 +12,7 @@ import InputBox from '../components/InputBox';
 
 const ChatRoomScreen = () => {
   const route = useRoute();
-  const [messages, setMessages] = useState(null);
+  const [messages, setMessages] = useState([]);
   const [myID, setMyID] = useState(null);
   const fetchMessages = async () => {
     const messagesData = await API.graphql(
