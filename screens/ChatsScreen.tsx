@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, Text } from 'react-native';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
 
 import { getUser } from './queries';
@@ -25,12 +25,16 @@ export default function ChatsScreen() {
   }, []);
   return (
     <View style={styles.container}>
-      <FlatList
-        style={{ width: '100%' }}
-        data={chatRooms}
-        renderItem={({ item }) => <ChatListItem chatRoom={item.chatRoom} />}
-        keyExtractor={({ id }) => id}
-      />
+      {chatRooms ? (
+        <FlatList
+          style={{ width: '100%' }}
+          data={chatRooms}
+          renderItem={({ item }) => <ChatListItem chatRoom={item.chatRoom} />}
+          keyExtractor={({ id }) => id}
+        />
+      ) : (
+        <Text>You have not chat with anyone yet</Text>
+      )}
       <NewMessageButton />
     </View>
   );

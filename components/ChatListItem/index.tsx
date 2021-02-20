@@ -15,7 +15,7 @@ const ChatListItem = (props: ChatListItemProps) => {
   const { chatRoom } = props;
   const [otherUser, setOtherUser] = useState(null);
   const navigation = useNavigation();
-  if (!otherUser || !chatRoom) return null;
+  if (!chatRoom) return null;
   const user = chatRoom.chatRoomUsers.items[1].user;
   useEffect(() => {
     const getOtherUser = async () => {
@@ -32,7 +32,7 @@ const ChatListItem = (props: ChatListItemProps) => {
   const onClick = () => {
     navigation.navigate('ChatRoom', { id: chatRoom.id, name: user.name });
   };
-
+  if (!otherUser) return null;
   return (
     <TouchableWithoutFeedback onPress={onClick}>
       <View style={styles.container}>

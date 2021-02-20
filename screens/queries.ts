@@ -11,7 +11,6 @@ export const getUser = /* GraphQL */ `
           userID
           chatRoomID
           createdAt
-          updatedAt
           chatRoom {
             id
             chatRoomUsers {
@@ -20,7 +19,6 @@ export const getUser = /* GraphQL */ `
                   id
                   name
                   imageUri
-                  status
                 }
               }
             }
